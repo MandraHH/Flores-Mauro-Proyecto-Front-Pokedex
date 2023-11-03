@@ -1,0 +1,17 @@
+.card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 16px;
+    margin: 16px;
+    text-align: center;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .pokemonImg {
+    max-width: 100%;
+  }
+  
+  .pokemonDetails {
+    margin-top: 16px;
+  }
+  

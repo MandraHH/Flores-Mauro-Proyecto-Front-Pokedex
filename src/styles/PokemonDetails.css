@@ -1,0 +1,31 @@
+/* PokemonDetails.css */
+.poke-card {
+    position: relative;
+    font-family: 'Roboto Mono', monospace;
+    max-width: 300px;
+    border-radius: 4px;
+    color: #000;
+    text-align: center;
+    padding: 10px;
+    margin: 0 auto;
+    background-color: #FFF;
+    border: 1px solid black;
+ 
+  }
+  
+  .poke-img-container {
+    position: relative;
+    width: 180px;
+    margin: 10px auto;
+  }
+  
+  .poke-img {
+    width: 180px;
+    border-radius: 50%;
+  }
+  
+  .poke-abilities,
+  .poke-evolutions,
+  .poke-moves {
+    margin-top: 15px; /* Espacio entre cada sección */
+  }
