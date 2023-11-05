@@ -1,62 +1,56 @@
-body {
-  font-family: Arial, sans-serif;
+.pokemon-list {
+   display: flex;
+   flex-wrap: wrap;
+   gap: 10px;
+   padding: 10px;
+   max-width: 1000px;
+   margin: 0 auto;
+   overflow-y: scroll; /* Habilita el scroll vertical si es necesario */
+   height: 80vh; /* Ajusta la altura para permitir desplazamiento vertical */
+   align-content: flex-start; /* Alinea los elementos arriba */
  }
  
- .pokemon-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-  gap: 10px;
-  padding: 10px;
-  max-width: 1000px;
-  margin: 0 auto;
- }
- 
+ /* Ajusta los estilos de los pokemon-card */
  .pokemon-card {
-  background-color: #f0f0f0;
-  border-radius: 5px;
-  padding: 15px;
-  text-align: center;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+   background-color: #f0f0f0;
+   border-radius: 5px;
+   padding: 10px;
+   text-align: center;
+   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+   width: calc(33.33% - 10px); /* Para 3 columnas con 10px de gap */
+   flex: 1 0 30%; /* Permite que los elementos ocupen el 30% del ancho del contenedor */
+   margin-bottom: 5px; /* Espacio entre filas */
  }
  
- .pokemon-card img {
-  width: 80px;
-  height: 80px;
- }
- 
- .pokemon-card h2 {
-  margin: 5px 0;
-  font-size: 14px;
- }
- 
- .pokemon-card p {
-  margin: 0;
-  font-size: 12px;
- }
- 
- /* Media query para dispositivos con ancho de pantalla menor a 768px */
+ /* Ajustes para imágenes y textos en dispositivos pequeños */
  @media (max-width: 768px) {
-  .pokemon-card h2 {
+   .pokemon-card h2 {
      font-size: 12px;
-  }
+   }
  
-  .pokemon-card p {
+   .pokemon-card p {
      font-size: 10px;
-  }
+   }
  }
  
- /* Media query para dispositivos con ancho de pantalla menor a 480px */
+ /* Ajustes adicionales para dispositivos muy pequeños */
  @media (max-width: 480px) {
-  .pokemon-card img {
+   .pokemon-card {
+     width: calc(50% - 10px); /* Para 2 columnas con 10px de gap */
+     flex: 1 0 45%; /* Ocupa el 45% del ancho */
+     margin-bottom: 4px; /* Espacio entre filas */
+   }
+ 
+   .pokemon-card img {
      width: 60px;
      height: 60px;
-  }
+   }
  
-  .pokemon-card h2 {
+   .pokemon-card h2 {
      font-size: 10px;
-  }
+   }
  
-  .pokemon-card p {
+   .pokemon-card p {
      font-size: 8px;
-  }
+   }
  }

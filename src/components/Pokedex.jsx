@@ -132,6 +132,13 @@ const Pokedex = () => {
 
 
   return (
+    
+    <div>
+    <div className="pokedex-title">
+      <h1>Pokedex</h1>
+    </div>
+
+
     <div className="pokedex-container">
       <div id="container">
       {/*<!------ LEFT SIDE ------>*/}
@@ -260,6 +267,7 @@ const Pokedex = () => {
           </div>
      </div>
     </div>
+</div>
 </div>
 </div>
   )

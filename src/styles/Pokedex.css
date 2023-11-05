@@ -28,7 +28,11 @@ body {
     width: 380px;
 }
 
-
+.pokedex-title {
+    text-align: center;
+    font-family: 'Pokemon Solid'; /* Aplica la fuente especial */
+    margin-top: 20px; /* Ajusta el margen superior para posicionarlo más arriba */
+  }
 /* Class for all the buttons */
 
 .clickable {

@@ -9,44 +9,37 @@ function PokemonDetails() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchData = async () => {
-      setLoading(true);
-      try {
-        if (id && !isNaN(id)) {
-          const pokemonResponse = await axios.get(`https://pokeapi.co/api/v2/pokemon/${id}`);
-          const speciesResponse = await axios.get(`https://pokeapi.co/api/v2/pokemon-species/${id}`);
-          const habitat = await axios.get(speciesResponse.data.habitat.url);
-
-          const entries = speciesResponse.data.flavor_text_entries.filter(entry => entry.language.name === 'es');
-          const spanishEntries = entries.slice(0, 2);
-
-          setPokemonDetails({ 
-            pokemon: pokemonResponse.data, 
-            species: speciesResponse.data, 
-            habitat: habitat.data.name, 
-            flavor_text_entries: spanishEntries 
-          });
-        } else {
-          throw new Error('ID de Pokémon no válido');
-        }
-      } catch (error) {
-        console.error('Error al obtener los detalles del Pokémon:', error);
-        setPokemonDetails(null);
-      } finally {
-        setLoading(false);
-      }
-    };
-
     fetchData();
-  }, [id]);
+  }, []);
 
-  if (!id || isNaN(id)) {
-    return <div>El ID del Pokémon no es válido.</div>;
-  }
+  const fetchData = async () => {
+    try {
+      const data = await getAllPokemon();
+      setPokemon(data);
+      setFilteredPokemon(data);
+    } catch (error) {
+      console.log('Error:', error);
+    }
+  };
 
-  if (loading || !pokemonDetails) {
-    return <div>Cargando...</div>;
-  }
+  const getAllPokemon = async () => {
+    try {
+      const response = await axios.get(`https://pokeapi.co/api/v2/pokemon?offset=0&limit=150`);
+      const data = response.data.results;
+      const pokemonDetails = await Promise.all(data.map(async (poke) => {
+        const pokeData = await axios.get(poke.url);
+        return {
+          name: pokeData.data.name,
+          id: pokeData.data.id,
+          image: pokeData.data.sprites.front_default,
+          // Otros detalles que puedas obtener
+        };
+      }));
+      return pokemonDetails;
+    } catch (error) {
+      console.log('Error fetching Pokemon data:', error);
+    }
+  };
 
   return (
     <div className="poke-card">
