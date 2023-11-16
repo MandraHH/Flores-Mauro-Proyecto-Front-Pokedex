@@ -6,7 +6,7 @@ const FilterComponent = ({
   onColorChange,
   onTypeChange,
   onWeightChange,
-  onSearchSubmit, 
+  onSearchSubmit,
   colorOptions,
   typeOptions,
 }) => {

@@ -4,11 +4,11 @@ import { DataGrid } from '@mui/x-data-grid';
 import Checkbox from '@mui/material/Checkbox';
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
-import Slider from '@mui/material/Slider';
+
 import TextField from '@mui/material/TextField';
 
 const Info = () => {
-  const [searchText, setSearchText] = useState('');
+  const [searchText, setSearchText] = useState('');wwwww
   const [babyFilter, setBabyFilter] = useState(false);
   const [colorFilter, setColorFilter] = useState('');
   const [weightFilter, setWeightFilter] = useState([0, 100]);
@@ -69,14 +69,7 @@ const Info = () => {
         <MenuItem value="Blue">Blue</MenuItem>
     
       </Select>
-      <Slider
-        value={weightFilter}
-        onChange={(_, newValue) => setWeightFilter(newValue)}
-        valueLabelDisplay="auto"
-        aria-labelledby="range-slider"
-        min={0}
-        max={150} 
-      />
+
       <Select
         multiple
         value={typeFilter}

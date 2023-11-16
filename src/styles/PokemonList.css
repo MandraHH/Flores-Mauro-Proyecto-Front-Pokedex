@@ -20,7 +20,14 @@
    width: calc(33.33% - 10px); /* Para 3 columnas con 10px de gap */
    flex: 1 0 30%; /* Permite que los elementos ocupen el 30% del ancho del contenedor */
    margin-bottom: 5px; /* Espacio entre filas */
+   cursor: pointer; 
+   transition: box-shadow 0.5s ease;
  }
+
+
+ .pokemon-card:hover {
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.781); /* Agrega un efecto de sombra al pasar el mouse */
+}
  
  /* Ajustes para imágenes y textos en dispositivos pequeños */
  @media (max-width: 768px) {

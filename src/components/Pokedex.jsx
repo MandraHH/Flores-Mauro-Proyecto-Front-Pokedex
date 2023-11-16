@@ -4,6 +4,9 @@ import { Link } from 'react-router-dom';
 import '../components/Evolutions';
 import '../styles/Pokedex.css';
 import '../components/PokemonList'
+import '../components/PokemonDetails'
+import PokemonDetails from '../components/PokemonDetails'; 
+
 
 const Pokedex = () => {
   const [description, setDescription] = useState('');
@@ -11,35 +14,21 @@ const Pokedex = () => {
   const [characteristics, setCharacteristics] = useState(null);
   const [pokemon, setPokemon] = useState(null);
   const [pokemonId, setPokemonId] = useState(1);
-  const totalPokemonLimit = 151;
+  const totalPokemonLimit = 1019;
   const [temporaryPokemon, setTemporaryPokemon] = useState(null);
-  const [isTemporary, setIsTemporary] = useState(false);
   const [evolutionChain, setEvolutionChain] = useState(null);
   const [encounterLocations, setEncounterLocations] = useState(null);
   const [showEvolutionChainModal, setShowEvolutionChainModal] = useState(false);
-  const [showPokemonImage, setShowPokemonImage] = useState(false);
   const [showEncounterLocationsModal, setShowEncounterLocationsModal] = useState(false);
 
-  const handleShowPokemonImage = () => {
-    setShowPokemonImage(true);
-    setTimeout(() => {
-      setShowPokemonImage(false);
-    }, 2000);
-  };
 
-  const fetchTemporaryPokemon = async () => {
+  const handleEncounterLocations = async () => {
     try {
-    
-      setTemporaryPokemon(process.env.PUBLIC_URL + '/8bit.jpg');
-
-      setIsTemporary(true);
-
-      setTimeout(() => {
-        setTemporaryPokemon(null);
-        setIsTemporary(false);
-      }, 3000);
+      const response = await axios.get(`https://pokeapi.co/api/v2/pokemon/${pokemonId}/encounters`);
+      setEncounterLocations(response.data);
+      setShowEncounterLocationsModal(true);
     } catch (error) {
-      console.error('Error fetching temporary Pokemon data:', error);
+      console.error('Error fetching encounter locations:', error);
     }
   };
 
@@ -177,7 +166,10 @@ const Pokedex = () => {
     
         <div id="elongated-buttons">
             <div className="elongated-button elongated-button1 clickable"></div>
-            <div className="elongated-button elongated-button2 clickable"></div>
+            <div
+            className="elongated-button elongated-button2 clickable"
+            onClick={handleEncounterLocations}>
+          </div>
         </div>
 
 
@@ -223,13 +215,11 @@ const Pokedex = () => {
       <p id="pokemon-attack-p" className="pokemon-stats-right">Ataque: <span id="pokemon-attack">{pokemon && pokemon.stats && pokemon.stats[1].base_stat}</span></p>
       <p id="pokemon-defense-p" className="pokemon-stats-left">Defensa: <span id="pokemon-defense">{pokemon && pokemon.stats && pokemon.stats[2].base_stat}</span></p>
       <p id="pokemon-speed-p" className="pokemon-stats-right">Velocidad: <span id="pokemon-speed">{pokemon && pokemon.stats && pokemon.stats[5].base_stat}</span></p>
-      {/* Los datos del Pokémon se mostrarán si la información está disponible */}
     </div>
        
     <div id="screen-info" className="keyboard">
         {characteristics && (
           <div>
-            {/* Render the fetched data here */}
             <p>Descripción: {description}</p>
             <p>Tipo: {type}</p>
           </div>
@@ -247,20 +237,21 @@ const Pokedex = () => {
      
         <div id="right-side-yellow-light" className="light"></div>
      
-        <div id="white-buttons">
+    <div id="white-buttons">
         <div className="key clickable" onClick={() => fetchEvolutionChain(pokemonId)}>
         
         </div>
   
         <div className="key clickable">
-      <Link to={`/pokemon/${pokemonId}`} style={{ textDecoration: 'none', color: 'inherit' }}>
-      </Link>
-        </div>
-      </div>
+  <Link to={`/pokemon/${pokemonId}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+  </Link>
+</div>
+    </div>
    
       <div id="grey-buttons">
            <div className="key clickable">
-           <Link to={`/evolutions/${pokemon}`}>Evoluciones</Link>
+           <Link to={`/evolutions/${pokemon && pokemon.id}/${pokemon && pokemon.name}`}>Evoluciones</Link>
+
               </div>
           <div className="key clickable">
               <Link to="/PokemonList">Lista</Link>
